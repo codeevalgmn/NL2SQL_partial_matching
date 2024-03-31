@@ -160,7 +160,7 @@ class GraphPropMatchingLayer(GraphPropLayer):
 
         if abs_pe_embedding:
             self._abs_pe_dim = abs_pe_dim
-            self._abs_pe_embedding = nn.Linear(node_state_dim, abs_pe_dim)
+            self._abs_pe_embedding = nn.Linear(abs_pe_dim, node_state_dim)
 
     def forward(self,
                 node_states,

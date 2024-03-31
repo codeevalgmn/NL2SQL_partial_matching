@@ -48,12 +48,9 @@ ONLINE_TRAIN_SETTINGS = {
     'LOG_FILE_NAME': "save_file/log/plot",
     'Checkpoint': 'save_file/checkpoints/',
 
-    'WH_train': 'database_spider/gmn_api_data/wh_in_sample_train.xlsx',
-    'WH_dev': 'database_spider/gmn_api_data/wh_in_sample_dev.xlsx',
-
     'Train': 'database_spider/gmn_api_data/train.xlsx',
-    'Dev': 'database_spider/gmn_api_data/test.xlsx',
-    'Dev_gpt4': 'database_spider/gmn_api_data/test_aug.xlsx',
+    'Dev': 'database_spider/gmn_api_data/dev.xlsx',
+    'Dev_gpt4': 'database_spider/gmn_api_data/dev_aug.xlsx',
 }
 
 print("==================================")
@@ -69,9 +66,6 @@ if is_cuda:
 
     train_path = os.path.join(ONLINE_TRAIN_SETTINGS['PATH_TO_GMN'], ONLINE_TRAIN_SETTINGS['Train'])
     dev_path = os.path.join(ONLINE_TRAIN_SETTINGS['PATH_TO_GMN'], ONLINE_TRAIN_SETTINGS['Dev'])
-
-    wh_train_path = os.path.join(ONLINE_TRAIN_SETTINGS['PATH_TO_GMN'], ONLINE_TRAIN_SETTINGS['WH_train'])
-    wh_dev_path = os.path.join(ONLINE_TRAIN_SETTINGS['PATH_TO_GMN'], ONLINE_TRAIN_SETTINGS['WH_dev'])
     dev_gpt4_path = os.path.join(ONLINE_TRAIN_SETTINGS['PATH_TO_GMN'], ONLINE_TRAIN_SETTINGS['Dev_gpt4'])
 
     print("Images saved in:", image_folder_path)
@@ -85,9 +79,6 @@ else:
 
     train_path = ONLINE_TRAIN_SETTINGS['Train']
     dev_path = ONLINE_TRAIN_SETTINGS['Dev']
-
-    wh_train_path = ONLINE_TRAIN_SETTINGS['WH_train']
-    wh_dev_path = ONLINE_TRAIN_SETTINGS['WH_dev']
     dev_gpt4_path = ONLINE_TRAIN_SETTINGS['Dev_gpt4']
 
 
@@ -109,22 +100,9 @@ torch.backends.cudnn.benchmark = True
 
 train_df = pd.read_excel(train_path, sheet_name="Sheet1").reset_index(drop=True)
 dev_df = pd.read_excel(dev_path, sheet_name="Sheet1").reset_index(drop=True)
-#
-# wh_train_df = clean_df(pd.read_excel(wh_train_path, sheet_name="Sheet1")).reset_index(drop=True)
-# wh_dev_df = clean_df(pd.read_excel(wh_dev_path, sheet_name="Sheet1")).reset_index(drop=True)
-#
 dev_gpt4_df = pd.read_excel(dev_gpt4_path, sheet_name="Sheet1").reset_index(drop=True)
-#
-# con_train_df = pd.concat([train_df, wh_train_df], axis=0).reset_index(drop=True)
 
-nums = 30
-
-train_df = train_df.head(nums)
-dev_df = dev_df.head(nums)
-dev_gpt4_df = dev_gpt4_df.head(nums)
-
-
-data_pre_processor = ASTProcessor()
+data_pre_processor = PositionalEncodingProcessor()
 pair_list_train, labels_train = data_pre_processor.read_data(train_df)
 train_batch_data = data_pre_processor.pairs_spider(config['training']['batch_size'], pair_list_train, labels_train)
 

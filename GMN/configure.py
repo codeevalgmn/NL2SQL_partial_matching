@@ -9,7 +9,7 @@ def get_default_config():
     graph_rep_dim = 128
     abs_pe = 'rw'
     abs_pe_dim = 32
-    abs_pe_embedding = False
+    abs_pe_embedding = True
     pe_type = 'whole'  # 'separate'
     graph_embedding_net_config = dict(
         abs_pe_dim=abs_pe_dim,

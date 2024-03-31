@@ -29,10 +29,7 @@ class DataPreProcessor(BaseDataPreProcessor):
             except:
                 print(i)
 
-            try:
-                label = data.loc[i]['label']
-            except:
-                label = data.loc[i]['label_new']
+            label = data.loc[i]['new_labels']
             db_id = data.loc[i]['db_id']
             if "[" and "]" in db_id:
                 db_id = ast.literal_eval(db_id)
