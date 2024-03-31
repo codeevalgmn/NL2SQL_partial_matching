@@ -16,8 +16,8 @@ VENV_PATH=$(poetry env info -p)
 source "$VENV_PATH/bin/activate"
 
 # 定义相对路径
-TORCH_SCATTER_RELATIVE_PATH="/GMN/dependencies/torch_scatter-2.0.9-cp39-cp39-linux_x86_64.whl"
-TORCH_SPARSE_RELATIVE_PATH="/GMN/dependencies/torch_sparse-0.6.17+pt113cu117-cp39-cp39-linux_x86_64.whl"
+TORCH_SCATTER_RELATIVE_PATH="GMN/dependencies/torch_scatter-2.0.9-cp37-cp37m-macosx_10_15_x86_64.whl"
+TORCH_SPARSE_RELATIVE_PATH="GMN/dependencies/torch_sparse-0.6.16-cp37-cp37m-macosx_10_15_x86_64.whl"
 
-pip3 install "${SCRIPT_DIR}${TORCH_SCATTER_RELATIVE_PATH}"
-pip3 install "${SCRIPT_DIR}${TORCH_SPARSE_RELATIVE_PATH}"
+pip3 install "${SCRIPT_DIR}/${TORCH_SCATTER_RELATIVE_PATH}"
+pip3 install "${SCRIPT_DIR}/${TORCH_SPARSE_RELATIVE_PATH}"
