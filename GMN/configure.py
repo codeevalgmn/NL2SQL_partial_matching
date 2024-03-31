@@ -35,7 +35,7 @@ def get_default_config():
         # set to `embedding` to use the graph embedding net.
         prop_type=model_type)
     graph_matching_net_config = graph_embedding_net_config.copy()
-    graph_matching_net_config['similarity'] = 'euclidean'  # other: euclidean, cosine
+    graph_matching_net_config['similarity'] = 'euclidean'  # other: euclidean, dotproduct
     graph_matching_net_config['abs_pe_embedding'] = abs_pe_embedding
     return dict(
         abs_pe=abs_pe,

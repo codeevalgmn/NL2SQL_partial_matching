@@ -11,7 +11,7 @@ import time
 import os
 import random
 import pandas as pd
-
+dir_path = os.path.split(os.path.realpath(__file__))[0]
 
 def model_eval_dev(dev_dataset : SpiderDataset, name):
 
@@ -43,14 +43,14 @@ is_cuda = torch.cuda.is_available()
 ONLINE_TRAIN_SETTINGS = {
     'NAME': "no_ascii_match_data_type",
     'GPU_DEVICE': torch.device('cuda:0' if is_cuda else 'cpu'),
-    'PATH_TO_GMN': "/opt/tiger/NL2SQL_partial_matching/GMN",
-    'IMAGES_FOLDER': "save_file/picture/",
-    'LOG_FILE_NAME': "save_file/log/plot",
-    'Checkpoint': 'save_file/checkpoints/',
+    'PATH_TO_GMN': dir_path,
+    'IMAGES_FOLDER': f'{dir_path}/save_file/picture/',
+    'LOG_FILE_NAME': f'{dir_path}/save_file/log/plot',
+    'Checkpoint': f'{dir_path}/save_file/checkpoints/',
 
-    'Train': 'database_spider/gmn_api_data/train.xlsx',
-    'Dev': 'database_spider/gmn_api_data/dev.xlsx',
-    'Dev_gpt4': 'database_spider/gmn_api_data/dev_aug.xlsx',
+    'Train': f'{dir_path}/database_spider/gmn_api_data/train.xlsx',
+    'Dev': f'{dir_path}/database_spider/gmn_api_data/dev.xlsx',
+    'Dev_gpt4': f'{dir_path}/database_spider/gmn_api_data/dev_aug.xlsx',
 }
 
 print("==================================")
